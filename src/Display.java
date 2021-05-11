@@ -20,8 +20,6 @@ public class Display {
 
     public void setBlinker(){
         World[5][5].setOutput('*');
-        World[5][6].setOutput('*');
-        World[5][4].setOutput('*');
         World[4][5].setOutput('*');
         World[6][5].setOutput('*');
 
@@ -31,7 +29,6 @@ public class Display {
     }
     
     public void showWorld(){
-        setBlinker();
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 Cell c = World[i][j];
@@ -43,6 +40,7 @@ public class Display {
 
     public void simulateGame(int times){
         generateWorld();
+        setBlinker();
         for (int i = 0; i < times; i++) {
             checkNeighbours();
             setState();

@@ -7,6 +7,7 @@ public class GameOfLife2 {
         Display d1 = new Display(10);
         d1.simulateGame(5);
 
+
     }
 
 
