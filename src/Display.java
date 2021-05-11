@@ -19,9 +19,13 @@ public class Display {
     }
 
     public void setBlinker(){
-        World[4][5].setOutput('*');
         World[5][5].setOutput('*');
+        World[5][6].setOutput('*');
+        World[5][4].setOutput('*');
+        World[4][5].setOutput('*');
         World[6][5].setOutput('*');
+
+
 
 
     }
@@ -44,6 +48,8 @@ public class Display {
             setState();
             System.out.println("Generation" + i);
             showWorld();
+            System.out.print("Nachbaren der Zelle 5/5: ");
+            System.out.println(World[5][5].getNeighboursAlive());
         }
 
     }
@@ -78,6 +84,7 @@ public class Display {
         }
     }
     private  void countNeighbours(Cell c, int x, int y) {
+        c.resetNeighbours();
         for (int i = x - 1; i <= x + 1; ++i) {
             for (int j = y - 1; j <= y + 1; ++j) {
                 if (j < 0 || j >= World[0].length || i < 0 || i >= World.length) { // skip world border
@@ -93,5 +100,7 @@ public class Display {
             c.decrementNeighbours();
         }
     }
+
+
 
 }

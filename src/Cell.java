@@ -22,4 +22,8 @@ public class Cell {
     public void decrementNeighbours(){
         this.neighboursAlive -= 1;
     }
+
+    public void resetNeighbours() {
+        this.neighboursAlive = 0;
+    }
 }
