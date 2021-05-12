@@ -1,14 +1,18 @@
 import java.time.Duration;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 
 public class Display {
-
-    private Cell[][] World = new Cell[10][10];
     private int size;
+    private Cell[][] World;
+    private Random dice = new Random();
 
     public Display(int size){
         this.size = size;
-    }
+        this.World = new Cell[size][size];
 
+    }
 
     public void generateWorld(){
         for (int i = 0; i < size; i++) {
@@ -22,11 +26,8 @@ public class Display {
         World[5][5].setOutput('*');
         World[4][5].setOutput('*');
         World[6][5].setOutput('*');
-
-
-
-
     }
+
     
     public void showWorld(){
         for (int i = 0; i < size; i++) {
@@ -38,7 +39,7 @@ public class Display {
         }
     }
 
-    public void simulateGame(int times){
+    public void simulateGame(int times) throws InterruptedException {
         generateWorld();
         setBlinker();
         for (int i = 0; i < times; i++) {
@@ -46,10 +47,8 @@ public class Display {
             setState();
             System.out.println("Generation" + i);
             showWorld();
-            System.out.print("Nachbaren der Zelle 5/5: ");
-            System.out.println(World[5][5].getNeighboursAlive());
+            TimeUnit.SECONDS.sleep(1);
         }
-
     }
 
     public void setState(){
