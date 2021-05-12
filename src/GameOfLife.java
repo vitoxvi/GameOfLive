@@ -1,4 +1,4 @@
-public class GameOfLife2 {
+public class GameOfLife {
 
 
 
