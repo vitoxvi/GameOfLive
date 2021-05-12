@@ -5,10 +5,12 @@ import java.util.concurrent.TimeUnit;
 
 public class Display {
     private int size;
+    private boolean BLINKER = false;
     private Cell[][] World;
-    private Random dice = new Random();
+    private Random r = new Random();
 
-    public Display(int size){
+    public Display(int size, boolean blinker){
+        this.BLINKER = blinker;
         this.size = size;
         this.World = new Cell[size][size];
 
@@ -28,6 +30,13 @@ public class Display {
         World[6][5].setOutput('*');
     }
 
+    public void setRandom(){
+        int times = (int)(size* size/4);
+        for (int i = 0; i < times; i++) {
+            World[r.nextInt(size)][r.nextInt(size)].setOutput('*');
+        }
+    }
+
     
     public void showWorld(){
         for (int i = 0; i < size; i++) {
@@ -41,13 +50,14 @@ public class Display {
 
     public void simulateGame(int times) throws InterruptedException {
         generateWorld();
-        setBlinker();
+         if(BLINKER)setBlinker();
+         else setRandom();
         for (int i = 0; i < times; i++) {
             checkNeighbours();
             setState();
             System.out.println("Generation" + i);
             showWorld();
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.MILLISECONDS.sleep(500);
         }
     }
 
