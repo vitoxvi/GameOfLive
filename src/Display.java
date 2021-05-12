@@ -1,19 +1,18 @@
-import java.time.Duration;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 
 public class Display {
     private int size;
-    private boolean BLINKER = false;
+    private boolean BLINKER;
     private Cell[][] World;
     private Random r = new Random();
+
 
     public Display(int size, boolean blinker){
         this.BLINKER = blinker;
         this.size = size;
         this.World = new Cell[size][size];
-
     }
 
     public void generateWorld(){
@@ -85,16 +84,14 @@ public class Display {
 
                 Cell c = World[i][j];
                 countNeighbours(c,i,j);
-
             }
-
         }
     }
-    private  void countNeighbours(Cell c, int x, int y) {
+    private  void countNeighbours(Cell c, int x, int y)  {
         c.resetNeighbours();
         for (int i = x - 1; i <= x + 1; ++i) {
             for (int j = y - 1; j <= y + 1; ++j) {
-                if (j < 0 || j >= World[0].length || i < 0 || i >= World.length) { // skip world border
+                if (j < 0 || j >= World[0].length || i < 0 || i >= World.length) {
                     continue;
                 }
                 if (World[i][j].getOutput() == '*') {
@@ -102,12 +99,8 @@ public class Display {
                 }
             }
         }
-
-        if (c.getOutput() == '*') { // don't count the living cell itself
+        if (c.getOutput() == '*') {
             c.decrementNeighbours();
         }
     }
-
-
-
 }
